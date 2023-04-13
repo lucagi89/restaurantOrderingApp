@@ -1,16 +1,83 @@
 
 
-import { menuArray } from "/data.js";
+import { menuArray } from "/data.js"
 
-const mainSection = document.getElementById('main')
+const itemsList = document.getElementById('items-list')
+const cart = document.getElementById('cart')
+let cartArray = []
+
+
+document.addEventListener('click', function(e){
+    if(e.target.dataset.addbtn){
+        addItem(e.target.dataset.addbtn)
+    }
+    if(e.target.dataset.removebtn){
+        removeItem(e.target.dataset.removebtn)
+    }
+    if(e.target.id == 'order-btn'){
+        paymentForm()
+    }
+    })
+
+
+function addItem(idItem){
+    const itemObj = menuArray.filter(function(item){
+        return item.id == idItem})[0]
+    cartArray.push(itemObj)
+    renderCart()
+    }
+
+function removeItem(item){
+    cartArray.splice(item, 1)
+    renderCart()
+    if(cartArray.length == 0){
+        cart.classList.add('hidden')
+    }
+}
+
+function paymentForm(){
+    
+
+}
+    
+
+function showCart(){
+    if(cart.classList.contains('hidden')){
+        cart.classList.remove('hidden')
+    }
+}
+
+function renderCart(){
+    const cartItemContainer = document.getElementById('cart-item-container')
+    const price = document.getElementById('price')
+    let totalPrice = 0
+    let cartItemsHtml = ''
+    if (cartArray){
+     cartArray.forEach(function(cartItem, index){
+        totalPrice += cartItem.price
+        cartItemsHtml +=`
+        <div id = "cart-item" class = "cart-item">
+            <h2 id="item-name" class="item-name">${cartItem.name}</h2>
+            <button id="remove-btn" class="remove-btn" data-removebtn="${index}">Remove</button>
+            <h3 id='item-price'>$${cartItem.price}</h3>
+        </div>
+        `
+    })
+    price.textContent = `$${totalPrice}`
+    cartItemContainer.innerHTML = cartItemsHtml
+    showCart()
+
+}
+}
+
 
 
 
 function mainHtml(){
-    let mainHtml = ''
+    let listHtml = ''
 
     for (let menuItem of menuArray){
-        mainHtml += `
+        listHtml += `
         <div id = "item" class = "item">
         <div id="emoji" class="emoji">
         ${menuItem.emoji}
@@ -20,16 +87,16 @@ function mainHtml(){
         <p>${menuItem.ingredients}</p>
         <h3>$${menuItem.price}</h3>
         </div>
-        <button id="add-btn" class="add-btn" data-add="${menuItem.id}">+</button>
+        <button id="add-btn" class="add-btn" data-addbtn="${menuItem.id}">+</button>
         </div>
         `
     }
-    return mainHtml
+    return listHtml
 }
 
 
 function render(){
-    mainSection.innerHTML = mainHtml()
+    itemsList.innerHTML = mainHtml()
 }
 
 render()

@@ -5,15 +5,21 @@ body{
     border: solid 2px black;
     margin: 0 auto;
 }
+#cart{
+    font-family: 'Smythe', cursive;
+}
 
+button{
+    cursor: pointer;
+}
 header{
     color: #FFFFFF;
     padding: 20px;
-    background-image: url('burger.jpg');
-    background-size: 1500px 500px;
+    background-image: url('burger.png');
+    background-repeat: no-repeat;
     background-position: 0% 100%;
     transform: perspective();
-    height: 150px;
+    height: 120px;
 }
 
 .item{
@@ -25,6 +31,7 @@ header{
     min-height: 150px;
     border-bottom:solid;
 }
+
 
 .description{
     display: block;
@@ -38,7 +45,8 @@ header{
 }
 
 .add-btn{
-    border-radius: 50px;
+    border-radius: 100px;
+    border-color: #8B8B8B;
     width: 50px;
     height: 50px;
     background-color: #FFFFFF;
@@ -50,4 +58,116 @@ header{
 p{
     color: #8B8B8B;
     margin-top: -15px;
+}
+
+/* cart styling */
+
+.hidden{
+    display:none;
+}
+
+#cart{
+    width:500px;
+    margin: 0 auto;
+}
+#order{
+    text-align: center;
+}
+.cart-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+}
+
+.total-price{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100px;
+    border-top:solid;
+}
+
+.remove-btn{
+    border:none;
+    background-color: #FFFFFF;
+    color:#8B8B8B;
+    font-size: 10px;
+}
+
+.item-name{
+    display: inline;
+}
+#item-price{
+    margin-left: auto;
+}
+.order-btn{
+    width: 500px;
+    height:60px;
+    background: #16DB99;
+    border:none;
+    font-family: 'Verdana';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color:#FFFFFF;
+}
+
+/* form styling */
+
+form{
+    position: fixed;
+    top: 30%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    background: #FFFFFF;
+   
+    width:520px;
+    height:540px;
+    margin: 0 auto;
+    box-shadow: black 0px 0px 100px;
+}
+
+.form-title,
+.card-name,
+.card-number,
+.card-cvv,
+#pay-btn{
+    display:block;
+    margin: 0 auto;
+    width:475px;
+    height: 70px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
+.form-title{
+    text-align: center;
+    font-family: 'Verdana';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 70px;
+}
+
+#pay-btn{
+    background: #16DB99;
+    border:none;
+    font-family: 'Verdana';
+    margin-top: 50px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color:#FFFFFF;
+    font-weight: 700;
+}
+
+.card{
+    font-size:20px;
+    padding: 0 15px ;
 }
