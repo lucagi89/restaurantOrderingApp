@@ -1,0 +1,53 @@
+body{
+    margin: 0px;
+    font-family: 'Smythe', cursive;
+    width:600px;
+    border: solid 2px black;
+    margin: 0 auto;
+}
+
+header{
+    color: #FFFFFF;
+    padding: 20px;
+    background-image: url('burger.jpg');
+    background-size: 1500px 500px;
+    background-position: 0% 100%;
+    transform: perspective();
+    height: 150px;
+}
+
+.item{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:500px;
+    min-height: 150px;
+    border-bottom:solid;
+}
+
+.description{
+    display: block;
+    
+    width:350px;
+}
+
+.emoji{
+    font-family: 'Inter', sans-serif;
+    font-size: 78px;
+}
+
+.add-btn{
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+}
+
+p{
+    color: #8B8B8B;
+    margin-top: -15px;
+}
