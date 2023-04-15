@@ -4,6 +4,7 @@ import { menuArray } from "/data.js"
 
 const itemsList = document.getElementById('items-list')
 const cart = document.getElementById('cart')
+const paymentForm = document.getElementById('pay-form')
 let cartArray = []
 
 
@@ -15,9 +16,15 @@ document.addEventListener('click', function(e){
         removeItem(e.target.dataset.removebtn)
     }
     if(e.target.id == 'order-btn'){
-        paymentForm()
+        show(paymentForm)
+    }
+    if(e.target.id == 'pay-btn'){
+            e.preventDefault()
+            orderComplete()
     }
     })
+
+
 
 
 function addItem(idItem){
@@ -35,15 +42,28 @@ function removeItem(item){
     }
 }
 
-function paymentForm(){
-    
+function orderComplete(){
+    const orderCompleted = document.getElementById('order-complete')
+    //I split the name value string(array) at the space, to get the first name
+    const firstName = document.getElementById('card-name').value.split(' ')[0]
+    hide(paymentForm)
+    hide(cart)
+    orderCompleted.innerHTML = `
+    <h2 id="thanks">Thanks, ${firstName}! Your order is on its way!</h2>`
+    show(orderCompleted)
+}
 
+
+function hide(div){
+    if(!div.classList.contains('hidden')){
+        div.classList.add('hidden')
+    }
 }
     
 
-function showCart(){
-    if(cart.classList.contains('hidden')){
-        cart.classList.remove('hidden')
+function show(div){
+    if(div.classList.contains('hidden')){
+        div.classList.remove('hidden')
     }
 }
 
@@ -55,7 +75,7 @@ function renderCart(){
     if (cartArray){
      cartArray.forEach(function(cartItem, index){
         totalPrice += cartItem.price
-        cartItemsHtml +=`
+        cartItemsHtml += `
         <div id = "cart-item" class = "cart-item">
             <h2 id="item-name" class="item-name">${cartItem.name}</h2>
             <button id="remove-btn" class="remove-btn" data-removebtn="${index}">Remove</button>
@@ -65,7 +85,7 @@ function renderCart(){
     })
     price.textContent = `$${totalPrice}`
     cartItemContainer.innerHTML = cartItemsHtml
-    showCart()
+    show(cart)
 
 }
 }

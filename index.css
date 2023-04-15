@@ -1,17 +1,38 @@
+
+
+
 body{
     margin: 0px;
     font-family: 'Smythe', cursive;
     width:600px;
-    border: solid 2px black;
     margin: 0 auto;
+    height: 1300px;
 }
-#cart{
-    font-family: 'Smythe', cursive;
-}
+
 
 button{
     cursor: pointer;
 }
+
+h1,h2,h3{
+    font-weight: 400;
+}
+
+h1{
+    font-size: 39px;
+    margin-bottom: 0px;
+    line-height: 10px;
+}
+
+h2{
+    font-size: 32px;
+}
+h3{
+    font-size: 22px;
+    margin-bottom: 0px;
+    line-height: 10px;
+}
+
 header{
     color: #FFFFFF;
     padding: 20px;
@@ -22,29 +43,37 @@ header{
     height: 120px;
 }
 
+#items-list{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
 .item{
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width:500px;
-    min-height: 150px;
+    min-height: 200px;
     border-bottom:solid;
+    
 }
 
 
 .description{
-    display: block;
-    
+
     width:350px;
+    min-height: 150px;
 }
 
 .emoji{
     font-family: 'Inter', sans-serif;
     font-size: 78px;
+
 }
 
 .add-btn{
+    border: solid;
     border-radius: 100px;
     border-color: #8B8B8B;
     width: 50px;
@@ -53,12 +82,14 @@ header{
     font-size: 32px;
     font-family: 'Inter', sans-serif;
     font-weight: 200;
+    align-self: center;
 }
 
 p{
     color: #8B8B8B;
     margin-top: -15px;
 }
+
 
 /* cart styling */
 
@@ -72,6 +103,7 @@ p{
 }
 #order{
     text-align: center;
+    margin-bottom: 30px;
 }
 .cart-item{
     display: flex;
@@ -80,14 +112,21 @@ p{
     height: 50px;
 }
 
+
 .total-price{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 100px;
+    height: 100px;
     border-top:solid;
 }
 
+
+#price{
+    align-self:center;
+    height: 120px;
+    line-height: 100px;
+}
 .remove-btn{
     border:none;
     background-color: #FFFFFF;
@@ -100,6 +139,8 @@ p{
 }
 #item-price{
     margin-left: auto;
+    line-height: 50px;
+    align-self: flex-end;
 }
 .order-btn{
     width: 500px;
@@ -118,11 +159,11 @@ p{
 
 form{
     position: fixed;
-    top: 30%;
-    left: 0;
     right: 0;
+    left: 0;
+    top: 50%;
     bottom: 0;
-    
+    transform: translateY(-50%);
     background: #FFFFFF;
    
     width:520px;
@@ -170,4 +211,17 @@ form{
 .card{
     font-size:20px;
     padding: 0 15px ;
+}
+
+.order-complete{
+    background-color: #b0eacf;
+    width: 500px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    margin: 30px auto;
+    color:#065F46;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
 }

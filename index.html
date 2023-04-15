@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,19 +21,35 @@
                 <div id = "cart-item-container" class = "cart-item-container">
                 </div>
                 <div id="total-price" class="total-price">
-                <h2>Total Price:</h2>
+                <h2 class="tot">Total Price:</h2>
                 <h3 id="price"></h3>
                 </div>
                 <button id="order-btn" class="order-btn">Complete Order</button>
             </div>
-                <form id="'payment-form" class="'payment-form ">
+            
+                <form id = 'pay-form' class = 'pay-form hidden'>
                     <h2 id="form-title" class="form-title">Enter card details</h2>
-                    <input type='text' id="card-name" class="card-name card" placeholder="Enter your name" required>
-                    <input type='text' id="card-number" class="card-number card" placeholder="Enter card number" required>
-                    <input type='text' id="card-cvv" class="card-cvv card" placeholder="Enter CVV" required>
+                    <input type='text' 
+                           id="card-name" 
+                           class="card-name card" 
+                           name = 'name' 
+                           placeholder="Enter your name" required>
+                    <input type='text' 
+                           id="card-number" 
+                           class="card-number card" 
+                           name = 'number' 
+                           placeholder="Enter card number" required>
+                    <input type='text' 
+                           id="card-cvv" 
+                           class="card-cvv card" 
+                           name = 'cvv' 
+                           placeholder="Enter CVV" required>
                     <button id="pay-btn">PAY</button>
                 </form>
             
+            <div id = 'order-complete' class = 'order-complete hidden'>
+                
+            </div>
         </main>
         
 	<script src="index.js" type="module"></script>
