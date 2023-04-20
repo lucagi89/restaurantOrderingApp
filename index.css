@@ -197,15 +197,17 @@ form{
 
 #pay-btn{
     background: #16DB99;
-    border:none;
-    font-family: 'Verdana';
-    margin-top: 50px;
-    font-style: normal;
-    font-weight: 700;
+    width:510px;
+    height: 75px;
+    padding: 0px 30px;
+    margin-top: 40px;
+    border: none;
+    color: #FFFFFF;
+    font-family: Verdana;
     font-size: 20px;
-    line-height: 24px;
-    color:#FFFFFF;
     font-weight: 700;
+    line-height: 31px;
+
 }
 
 .card{
