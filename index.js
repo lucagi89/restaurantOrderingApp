@@ -16,6 +16,7 @@ let arrayNames = []
 document.addEventListener('click', function(e){
     if(e.target.dataset.addbtn){
         addItem(getItemObj(e.target.dataset.addbtn))
+        console.log(e.target.dataset.addbtn)
     }
     if(e.target.dataset.removebtn){
         removeItem(getItemObj(e.target.dataset.removebtn))
@@ -46,9 +47,13 @@ function addItem(itemObj){
 
 
 function removeItem(itemObj){
-    itemsArray.splice(itemObj, 1)
-    console.log(itemsArray)
-    getCartObj(itemObj)
+    console.log(itemObj)
+    // let index = itemsArray.findIndex(object => {
+    //     return object.id === itemObj.id
+    // })
+    // itemsArray.splice(index, 1)
+    // console.log(itemsArray)
+    // getCartObj(itemObj)
 }
 
 function itemsCount(obj){
@@ -62,7 +67,10 @@ function itemsCount(obj){
 
 function getCartObj(obj){
     // I create an object with the name of the item, the number of times it appears in the array and the price
-    let itemCountsObj = {name: obj.name, value: itemsCount(obj), price: obj.price}    
+    let itemCountsObj = {name: obj.name, 
+                         value: itemsCount(obj), 
+                         price: obj.price
+                        }    
     getCartArray(itemCountsObj)
 }
 
@@ -98,7 +106,7 @@ function show(div){
     }
 }
 
-function renderCart(){
+function renderCart(index){
     // I create an 's' variable to add in case of more than one item
     let letterS = ''
     // I create a variable to store the cart html
@@ -113,7 +121,7 @@ function renderCart(){
     cartHtml += `
         <div id = "cart-item" class = "cart-item">
             <h2 id="item-name" class="item-name">${item.value} ${item.name}${letterS}</h2>
-            <button id="remove-btn" class="remove-btn" data-removebtn="x">Remove</button>
+            <button id="remove-btn" class="remove-btn" data-removebtn="${index}">Remove</button>
             <h3 id='item-price'>$${item.price}</h3>
         </div>
         `
