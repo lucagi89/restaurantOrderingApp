@@ -5,16 +5,20 @@ import { menuArray } from "/data.js"
 const itemsList = document.getElementById('items-list')
 const cart = document.getElementById('cart')
 const paymentForm = document.getElementById('pay-form')
+const price = document.getElementById('price')
+const cartItemContainer = document.getElementById('cart-item-container')
 let itemsArray = []
 let itemCounts = {}
+let cartArray = []
+let arrayNames = []
 
 
 document.addEventListener('click', function(e){
     if(e.target.dataset.addbtn){
-        addItem(e.target.dataset.addbtn)
+        addItem(getItemObj(e.target.dataset.addbtn))
     }
     if(e.target.dataset.removebtn){
-        removeItem(e.target.dataset.removebtn)
+        removeItem(getItemObj(e.target.dataset.removebtn))
     }
     if(e.target.id == 'order-btn'){
         show(paymentForm)
@@ -25,34 +29,105 @@ document.addEventListener('click', function(e){
     }
     })
 
+function getItemObj(chosenItem){
+    let itemObj = menuArray.filter(item =>{
+        return item.id == chosenItem})[0]
+    return itemObj
+
+}
 
 
-
-function addItem(idItem){
-    const itemObj = menuArray.filter(function(item){
-        return item.id == idItem})[0]
+function addItem(itemObj){
     itemsArray.push(itemObj)
-    itemsCountFunction(itemObj)
+    console.log(itemsArray)
+    // I call the function to count the items
+    getCartObj(itemObj)
     }
 
-function itemsCountFunction(obj){
-    const arrayNames = []
+
+function removeItem(itemObj){
+    itemsArray.splice(itemObj, 1)
+    console.log(itemsArray)
+    getCartObj(itemObj)
+}
+
+function itemsCount(obj){
+    // I reset the arrayNames array
+    arrayNames = []
+    // 
     itemsArray.forEach(item => { arrayNames.push(item.name)})
-    itemCounts = arrayNames.filter(item => {return obj.name === item}).length
-    let itemCountsObj = {name: obj.name, value: itemCounts}    
-    
-    console.log(itemCountsObj)
-    renderCart(itemCountsObj)
+    let itemCounts = arrayNames.filter(item => {return obj.name === item}).length
+    return itemCounts
+}
+
+function getCartObj(obj){
+    // I create an object with the name of the item, the number of times it appears in the array and the price
+    let itemCountsObj = {name: obj.name, value: itemsCount(obj), price: obj.price}    
+    getCartArray(itemCountsObj)
+}
+
+function getCartArray(itemObj){
+    // I check if the item is already in the cartArray
+    if(cartArray.some(item => {return item.name === itemObj.name})){
+        // If it is, I update the value of the item
+    let index = cartArray.findIndex(item => {return item.name === itemObj.name})
+    // I update the value of the item and the price
+    cartArray[index].value = itemObj.value
+    cartArray[index].price = itemObj.price*itemObj.value
+    }else{
+        // If it isn't, I add the item to the cartArray
+        cartArray.push(itemObj)
+    }
+    renderCart()
+
 }
 
 
 
-function removeItem(item){
-    itemsArray.splice(item, 1)
-    renderCart()
-    if(itemsArray.length == 0){
-        cart.classList.add('hidden')
+
+// function hide(div){
+//     if(!div.classList.contains('hidden')){
+//         div.classList.add('hidden')
+//     }
+// }
+    
+
+function show(div){
+    if(div.classList.contains('hidden')){
+        div.classList.remove('hidden')
     }
+}
+
+function renderCart(){
+    // I create an 's' variable to add in case of more than one item
+    let letterS = ''
+    // I create a variable to store the cart html
+    let cartHtml = ''
+    // I loop through the cartArray to create the html
+    cartArray.forEach(item =>{
+        if(item.value>1){
+            letterS = 's'
+        }else{
+            letterS = ''
+        }
+    cartHtml += `
+        <div id = "cart-item" class = "cart-item">
+            <h2 id="item-name" class="item-name">${item.value} ${item.name}${letterS}</h2>
+            <button id="remove-btn" class="remove-btn" data-removebtn="x">Remove</button>
+            <h3 id='item-price'>$${item.price}</h3>
+        </div>
+        `
+    })
+    cartItemContainer.innerHTML = cartHtml
+    price.innerHTML = `$${getTotalPrice()}`
+    show(cart)
+}
+
+function getTotalPrice(){
+    let totalPrice = 0
+    // I loop through the cartArray to get the total price
+    cartArray.forEach(item => {totalPrice += item.price})
+    return totalPrice
 }
 
 function orderComplete(){
@@ -66,50 +141,8 @@ function orderComplete(){
     show(orderCompleted)
 }
 
-
-
-function hide(div){
-    if(!div.classList.contains('hidden')){
-        div.classList.add('hidden')
-    }
-}
+  
     
-
-function show(div){
-    if(div.classList.contains('hidden')){
-        div.classList.remove('hidden')
-    }
-}
-
-function renderCart(name, value){
-    const cartItemContainer = document.getElementById('cart-item-container')
-    const price = document.getElementById('price')
-    let letterS = ''
-    let totalPrice = 0
-    let cartItemsHtml = ''
-
-    if(value>1){
-        letterS = 's'
-    }
-    else{
-        letterS = ''
-    }
-        let itemObj = itemsArray.filter(function(item){ 
-            return item.name === name})[0]
-        totalPrice += itemObj.price
-        cartItemsHtml += `
-        <div id = "cart-item" class = "cart-item">
-            <h2 id="item-name" class="item-name">${itemObj.value} ${itemObj.name}${letterS}</h2>
-            <button id="remove-btn" class="remove-btn" data-removebtn="x">Remove</button>
-            <h3 id='item-price'>$${itemObj.price*cartItem.value}</h3>
-        </div>
-        `
-    }
-    price.textContent = `$${totalPrice}`
-    cartItemContainer.innerHTML = cartItemsHtml
-    show(cart)
-
-}
 
 
 
@@ -117,7 +150,7 @@ function renderCart(name, value){
 
 function mainHtml(){
     let listHtml = ''
-
+    // I loop through the menuArray to create the html
     for (let menuItem of menuArray){
         listHtml += `
         <div id = "item" class = "item">
