@@ -165,7 +165,7 @@ form{
     bottom: 0;
     transform: translateY(-50%);
     background: #FFFFFF;
-   
+    padding: 0px 30px;
     width:520px;
     height:540px;
     margin: 0 auto;
