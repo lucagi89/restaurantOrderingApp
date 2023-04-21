@@ -41,6 +41,8 @@ function mainHtml(){
 document.addEventListener('click', function(e){
     if(e.target.dataset.addbtn){
         addItem(getItemObj(e.target.dataset.addbtn))
+         // I hide the order completed message
+        hide(orderCompleted)
     }
     if(e.target.dataset.removebtn){
         removeItem(getItemObj(e.target.dataset.removebtn))
@@ -228,8 +230,6 @@ payForm.addEventListener('submit', function(e){
     cartItemContainer.innerHTML = ''
     // I reset the price
     price.innerHTML = ''
-    // I hide the order completed message
-    hide(orderCompleted)
    //empty the form data
     payForm.reset()
     // I call the function to render the items
