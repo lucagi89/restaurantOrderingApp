@@ -229,7 +229,7 @@ payForm.addEventListener('submit', function(e){
     // I reset the price
     price.innerHTML = ''
     // I hide the order completed message
-    hide(orderComplete)
+    hide(orderCompleted)
    //empty the form data
     payForm.reset()
     // I call the function to render the items
