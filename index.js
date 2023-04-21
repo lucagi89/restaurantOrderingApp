@@ -7,6 +7,7 @@ const cart = document.getElementById('cart')
 const paymentForm = document.getElementById('pay-form')
 const price = document.getElementById('price')
 const cartItemContainer = document.getElementById('cart-item-container')
+const payForm = document.getElementById('pay-form')
 // I create an array to store the items added to the cart
 let itemsArray = []
 // I create an array to store the items in the cart and their number of times they appear
@@ -46,11 +47,9 @@ document.addEventListener('click', function(e){
     if(e.target.id == 'order-btn'){
         show(paymentForm)
     }
-    if(e.target.id == 'pay-btn'){
-            e.preventDefault()
-            orderComplete()
-    }
     })
+
+
 // I create a function to get the selected item object from the menuArray
 function getItemObj(chosenItem){
     let itemObj = {}
@@ -172,16 +171,58 @@ function getTotalPrice(){
     return totalPrice
 }
 
-function orderComplete(){
+payForm.addEventListener('submit', function(e){
+    // I prevent the default behaviour of the form
+    e.preventDefault()
+
     const orderCompleted = document.getElementById('order-complete')
-    //I split the name value string(array) at the space, to get the first name
-    const firstName = document.getElementById('card-name').value.split(' ')[0]
-    hide(paymentForm)
-    hide(cart)
-    orderCompleted.innerHTML = `
-    <h2 id="thanks">Thanks, ${firstName}! Your order is on its way!</h2>`
-    show(orderCompleted)
+    const nameInput = document.getElementById('card-name')
+    const cardNumberInput = document.getElementById('card-number')
+    const cvvInput = document.getElementById('card-cvv')
+    const nameCustomer = new FormData(payForm).get('name')
+    const cardNumber = new FormData(payForm).get('card-number')
+    const nameOnly = /^[a-zA-Z]+$/;
+    if (nameOnly.test(nameCustomer)) {
+        nameInput.classList.add('red')
+        alert("Please enter a valid name.")
+        return false;
+    }
+
+
+    // Validate the card number input using a regular expression
+  const cardNumberRequirement = /^\d+$/
+  if (!cardNumberRequirement.test(cardNumberInput.value)) {
+        cardNumberInput.classList.add('red')
+        alert("Please enter a valid card number.")
+        return false;
+        }
+
+
+  // Validate the cvv input
+  if (cvvInput.value.length !== 3) {
+    cvvInput.classList.add('red')
+    alert("Please enter a valid CVV.");
+    return false;
+  }
+
+  //I split the name value string(array) at the space, to get the first name
+  const firstName = nameCustomer.split(' ')[0]
+  // I render the order completed message
+  orderCompleted.innerHTML = `
+  <h2 id="thanks">Thanks, ${firstName}! Your order is on its way!</h2>`
+  show(orderCompleted)
+  // I hide the payment form and the cart
+  hide(paymentForm)
+  hide(cart)
+    // I reset the arrays
+  itemsArray = []
+  cartArray = []
+  arrayNames = []
+
+  // If all input values are valid, submit the form
+  return true;
 }
+)
 
   
 
