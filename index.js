@@ -180,9 +180,8 @@ payForm.addEventListener('submit', function(e){
     const cardNumberInput = document.getElementById('card-number')
     const cvvInput = document.getElementById('card-cvv')
     const nameCustomer = new FormData(payForm).get('name')
-    const cardNumber = new FormData(payForm).get('card-number')
     const nameOnly = /^[a-zA-Z]+$/;
-    if (nameOnly.test(nameCustomer)) {
+    if (nameOnly.test(nameInput.value)) {
         nameInput.classList.add('red')
         alert("Please enter a valid name.")
         return false;
@@ -218,6 +217,7 @@ payForm.addEventListener('submit', function(e){
   itemsArray = []
   cartArray = []
   arrayNames = []
+  render()
 
   // If all input values are valid, submit the form
   return true;
