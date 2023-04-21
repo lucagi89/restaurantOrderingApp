@@ -8,6 +8,7 @@ const paymentForm = document.getElementById('pay-form')
 const price = document.getElementById('price')
 const cartItemContainer = document.getElementById('cart-item-container')
 const payForm = document.getElementById('pay-form')
+const orderCompleted = document.getElementById('order-complete')
 // I create an array to store the items added to the cart
 let itemsArray = []
 // I create an array to store the items in the cart and their number of times they appear
@@ -175,8 +176,6 @@ function getTotalPrice(){
 payForm.addEventListener('submit', function(e){
     // I prevent the default behaviour of the form
     e.preventDefault()
-
-    const orderCompleted = document.getElementById('order-complete')
     const nameInput = document.getElementById('card-name')
     const cardNumberInput = document.getElementById('card-number')
     const cvvInput = document.getElementById('card-cvv')
