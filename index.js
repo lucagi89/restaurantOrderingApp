@@ -214,18 +214,30 @@ payForm.addEventListener('submit', function(e){
   // I hide the payment form and the cart
   hide(paymentForm)
   hide(cart)
-    // I reset the arrays
-  itemsArray = []
-  cartArray = []
-  arrayNames = []
-  render()
+  initialize()
 
   // If all input values are valid, submit the form
   return true;
 }
 )
 
-  
+ function initialize(){
+    // I reset the arrays
+  itemsArray = []
+  cartArray = []
+  arrayNames = []
+    // I reset the cart html
+    cartItemContainer.innerHTML = ''
+    // I reset the price
+    price.innerHTML = ''
+    // I hide the order completed message
+    hide(orderComplete)
+   //empty the form data
+    payForm.reset()
+    // I call the function to render the items
+    render()
+}
+
 
 
 function render(){
