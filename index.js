@@ -41,7 +41,6 @@ function mainHtml(){
 document.addEventListener('click', function(e){
     if(e.target.dataset.addbtn){
         addItem(getItemObj(e.target.dataset.addbtn))
-        hide(orderCompleted)
     }
     if(e.target.dataset.removebtn){
         removeItem(getItemObj(e.target.dataset.removebtn))
